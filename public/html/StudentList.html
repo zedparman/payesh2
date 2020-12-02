@@ -1,0 +1,65 @@
+<!-- IMPORT MODULE DETAIL -->
+<!-- 
+
+	Module : 	StudentList
+	
+	Links : 	StudentEdit
+					/students/{id}
+.				
+	
+	Nesteds : 	
+				
+-->
+<!-- /IMPORT MODULE DETAIL -->
+<div ng-controller="StudentListController">
+	
+	<h1>StudentList</h1>
+	
+	<!-- SEARCH FORM -->
+	<div class="well">
+	    <form name="form_search" class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="Family">Family</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.Family" class="form-control" name="Family" id="Family" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="Name">Name</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.Name" class="form-control" name="Name" id="Name" >
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- TABLE -->
+	<table class="table table-condensed table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>_id</th>
+				<th>Family</th>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in list | filter: {  Family:search.Family,  Name:search.Name,  }">
+				<td ng-bind="item._id" ng-link="/students/{{item._id}}"></td>
+				<td ng-bind="item.Family"></td>
+				<td ng-bind="item.Name"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="mb-20" ng-if="list.$resolved && (list | filter :{   Family:search.Family,  Name:search.Name,  }).length == 0">
+        <b>No result found</b>
+    </div>
+
+	<!-- BUTTON -->
+	<button class="btn btn-primary" ng-link="/students/new">New</button>
+	
+</div>

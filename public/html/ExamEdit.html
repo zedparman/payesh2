@@ -1,0 +1,106 @@
+<!-- IMPORT MODULE DETAIL -->
+<!-- 
+
+	Module : 	ExamEdit
+	
+	Links : 	
+	
+	Nesteds : 	
+				
+-->
+<!-- /IMPORT MODULE DETAIL -->
+<div ng-controller="ExamEditController">
+	
+	<h1>
+		<span>ExamEdit</span>
+		{{obj.name}}
+	</h1>
+	
+	
+	
+	<div class="well">
+		<form name="skaffolderForm" class="container-fluid mt-20">
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="Gradee">Gradee</label>
+				</div>
+				<div class="col-sm-9 form-group" ng-class="{ 'has-error' : skaffolderForm.Gradee.$invalid }">
+					<input string-to-number type="number" ng-model="obj.Gradee"  class="form-control" name="Gradee" id="Gradee" >
+		 			
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="Name">Name</label>
+				</div>
+				<div class="col-sm-9 form-group" ng-class="{ 'has-error' : skaffolderForm.Name.$invalid }">
+					<input  type="text" ng-model="obj.Name"  class="form-control" name="Name" id="Name" >
+		 			
+				</div>
+			</div>
+			
+			
+			<h2>Relations</h2>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="_students">
+						_students
+					</label>
+				</div>
+				<div class="col-sm-9 form-group" ng-class="{ 'has-error' : skaffolderForm._students.$invalid }">
+					<select ng-model="obj._students" class="form-control" name="_students" id="_students"  >
+						<option ng-repeat="item in list_Student"  value="{{item._id}}">{{item._id}}</option>
+					</select>
+		 			
+				</div>
+			</div>
+			
+			
+			<h2>External Relations</h2>
+			
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="_Student_exams">
+						_Student_exams
+					</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<div ng-repeat="item in external._Student_exams track by $index">
+						{{item._id}}
+					</div>
+				</div>
+			</div>
+	
+			<div class="row mt-40">
+				<button ng-if="obj._id" class="btn btn-danger" data-toggle="modal" data-target="#removeModal">
+					<i class="glyphicon glyphicon-trash"></i> Remove
+				</button>
+				
+				<button type="submit" class="btn btn-primary pull-right" ng-disabled="skaffolderForm.$invalid" ng-click="save()">Save</button>
+			    <button class="btn btn-link pull-right" ng-link="/exams/">Back to List</button>
+			</div>
+			<div class="clearfix"></div>
+		</form>
+		
+	</div>
+	
+	
+	<!-- MODAL REMOVE -->
+	<div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Delete item</h4>
+				</div>
+				<div class="modal-body">
+					Do you want confirm delete? 
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove()">YES</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

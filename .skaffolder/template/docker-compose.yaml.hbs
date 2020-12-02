@@ -21,12 +21,12 @@ services:
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=1
     volumes:{{#each dbs}}
-       - ./server/script/schemaDb_{{name}}_mysql.sql:/docker-entrypoint-initdb.d/schemaDb_{{name}}_mysql.sql{{/each}}
+       - .//script/schemaDb_{{name}}_mysql.sql:/docker-entrypoint-initdb.d/schemaDb_{{name}}_mysql.sql{{/each}}
        
   # Backend
   backend: 
     # directory of Dockerfile
-    build: ./server
+    build: ./
     ports:
       - "3000:3000"
     # link this service to database service
@@ -41,7 +41,7 @@ services:
       
   # Frontend
   frontend:
-    build: ./client
+    build: ./public
     ports:
       - "2000:2000"
     networks:
